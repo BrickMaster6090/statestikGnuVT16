@@ -8,12 +8,19 @@ public class DataCollection {
 	private String yUnit;
 	
 	public DataCollection(String title,String xUnit, String yUnit,Map<String, MatchedDataPair> data ){
+		this.title=title;
+		this.xUnit=xUnit;
+		this.yUnit=yUnit;
+		this.data=data;
+
 		
 	}
+
 	public String getTitle(){
 		return title;
 	}
 	public String getXUnit(){
+		
 		return xUnit;
 	}
 	public String getYUnit(){

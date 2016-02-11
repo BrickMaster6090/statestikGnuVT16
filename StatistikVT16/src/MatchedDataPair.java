@@ -6,8 +6,12 @@ public class MatchedDataPair {
 	
 	public MatchedDataPair(Double x,Double y){
 		
+		this.xValue = x;
+		this.yValue = y;
+		
 	}
 	public double getXValue(){
+		
 		return xValue;
 	}
 	public double getYValue(){
