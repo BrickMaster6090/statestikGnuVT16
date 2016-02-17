@@ -1,31 +1,27 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public enum Resolution {
 
 	YEAR{
 		public String trim(LocalDate date ){
-			Integer yearDate;
-			yearDate = date.getYear();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
+			String year = date.format(formatter);
 			
-			return yearDate.toString() ;
+			return year;
 			
 		}
 	},
 	QUARTER{
 public String trim(LocalDate date ){
-	Integer yearDate;
-	yearDate = date.getYear();
-	Integer monthDate;
-	monthDate = date.getMonthValue();
-	Integer quarter;
-	quarter = (monthDate + 2)/ 3;
-	// tag månad plusa på 2 dividera med tre, måste vara int.
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy Q");
+	String quater = date.format(formatter);
 	
 	
-	String yearandquarter;
-	yearandquarter = yearDate.toString() +" - " + quarter.toString();
 	
-	return yearandquarter ;
+	
+	return quater ;
 			
 			
 			
@@ -33,25 +29,24 @@ public String trim(LocalDate date ){
 	},
 	MONTH{
 public String trim(LocalDate date ){
-	Integer yearDate;
-	yearDate = date.getYear();
-	Integer monthDate;
-	monthDate = date.getMonthValue();
 	
-	String yearandmonth;
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM");
+	String month = date.format(formatter);
 	
-	yearandmonth = yearDate.toString() +" - "+ monthDate.toString();
 	
-	return yearandmonth;
+	return month;
 			
 		}
 	},
 	WEEK{
 public String trim(LocalDate date ){
-	Integer yearDate;
-	yearDate = date.getYear();
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy w");
+	String week = date.format(formatter);
 	
-	return yearDate.toString() ;
+	
+	
+	
+	return week ;
 			
 		}
 	},
@@ -62,5 +57,7 @@ public String trim(LocalDate date ){
 	};
 	
 	public abstract String trim(LocalDate date );
+		
+	
 	
 }
