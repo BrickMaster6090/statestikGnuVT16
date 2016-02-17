@@ -5,48 +5,63 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class DataSourceer implements DataSource {
+/**
+ * @author ntn13dcm
+ * @author ofk14den
+ * @version 2016-02-17
+ */
+public class DataSourcerBuilder implements DataSource {
 
 	Map<LocalDate, Double> DataValue = new HashMap<LocalDate, Double>();
-	Map<List<String>,Map<LocalDate,Double>> tmep = new HashMap<List<String>, Map<LocalDate,Double>>();
 	List<String> nameandunit = new ArrayList<String>();
-	
-	public DataSourceer() {
+
+	/**
+	 * Constructor of the DataSourceer Class
+	 */
+	public DataSourcerBuilder() {
 
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		
-		return nameandunit.get(0).toString() ;
+
+		return nameandunit.get(0).toString();
 	}
 
 	@Override
 	public String getUnit() {
-		
+
 		return nameandunit.get(1).toString();
 	}
 
-	public void setValue(String name,String unit, LocalDate date, Double value) {
+	/**
+	 * adds the values to a Map and sort it
+	 * 
+	 * @param name
+	 *            String
+	 * @param unit
+	 *            String
+	 * @param date
+	 *            LocalDate
+	 * @param value
+	 *            Double
+	 */
+	public void setValue(String name, String unit, LocalDate date, Double value) {
 		DataValue.put(date, value);
 		sortData();
-	
+
 		nameandunit.add(name);
-		nameandunit.add(unit);;
-		
-		
+		nameandunit.add(unit);
+		;
+
 	}
 
 	@Override
 	public Map<LocalDate, Double> getData() {
-		// TODO Auto-generated method stub
 
 		return DataValue;
 	}
 
-	// sorterings koden
-	// http://beginnersbook.com/2013/12/how-to-sort-hashmap-in-java-by-keys-and-values/
 	private void sortData() {
 		DataValue = new TreeMap<LocalDate, Double>(DataValue);
 	}

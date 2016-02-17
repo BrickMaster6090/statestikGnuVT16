@@ -1,62 +1,69 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * @author ntn13dcm
+ * @author ofk14den
+ * @version 2016-02-17
+ */
 public enum Resolution {
 
+
 	YEAR{
-		public String trim(LocalDate date ){
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
-			String year = date.format(formatter);
+		public String createLabel(LocalDate date ){
+			DateTimeFormatter label = DateTimeFormatter.ofPattern("yyyy");
+			 
+		
 			
-			return year;
+			return date.format(label).toString();
 			
 		}
 	},
 	QUARTER{
-public String trim(LocalDate date ){
+public String createLabel(LocalDate date ){
 	
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy Q");
-	String quater = date.format(formatter);
-	
-	
+	DateTimeFormatter label = DateTimeFormatter.ofPattern("yyyy Q");
+
 	
 	
-	return quater ;
+	
+	
+	return  date.format(label).toString();
 			
 			
 			
 		}
 	},
 	MONTH{
-public String trim(LocalDate date ){
+public String createLabel(LocalDate date ){
 	
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM");
-	String month = date.format(formatter);
+	DateTimeFormatter label = DateTimeFormatter.ofPattern("yyyy MM");
+
 	
 	
-	return month;
+	return date.format(label).toString();
 			
 		}
 	},
 	WEEK{
-public String trim(LocalDate date ){
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy w");
-	String week = date.format(formatter);
+public String createLabel(LocalDate date ){
+	DateTimeFormatter label = DateTimeFormatter.ofPattern("yyyy w");
+
 	
 	
 	
 	
-	return week ;
+	return  date.format(label).toString();
 			
 		}
 	},
 	DAY{
-public String trim(LocalDate date ){
+public String createLabel(LocalDate date ){
 			return date.toString();
 		}
 	};
 	
-	public abstract String trim(LocalDate date );
+	public abstract String createLabel(LocalDate date );
 		
 	
 	

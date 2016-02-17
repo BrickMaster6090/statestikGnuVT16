@@ -28,8 +28,8 @@ public class TestDataCollectionBuilder {
 
 	@Test
 	public void testDay() {
-		DataSourceer xData = new DataSourceer();
-		DataSourceer yData = new DataSourceer();
+		DataSourcerBuilder xData = new DataSourcerBuilder();
+		DataSourcerBuilder yData = new DataSourcerBuilder();
 		String xname = "Gnuer", yname = "Lejon",xunit="Antal",yunit="Antal";
 		
 
@@ -65,8 +65,8 @@ public class TestDataCollectionBuilder {
 	@Test
 	public void testWeek() {
 		
-		DataSourceer xWeekData = new DataSourceer();
-		DataSourceer yWeekData = new DataSourceer();
+		DataSourcerBuilder xWeekData = new DataSourcerBuilder();
+		DataSourcerBuilder yWeekData = new DataSourcerBuilder();
 		String xname = "Gnuer", yname = "Lejon",xunit="Antal",yunit="Antal";
 		
 		
@@ -100,8 +100,8 @@ public class TestDataCollectionBuilder {
 	@Test
 	public void testMonth() {
 		
-		DataSourceer  xmonthData = new DataSourceer();
-		DataSourceer ymonthData = new DataSourceer();
+		DataSourcerBuilder  xmonthData = new DataSourcerBuilder();
+		DataSourcerBuilder ymonthData = new DataSourcerBuilder();
 		String xname = "Gnuer", yname = "Lejon",xunit="Antal",yunit="Antal";
 		
 		 xmonthData.setValue(xname,xunit,LocalDate.now(), 10.0);
@@ -149,8 +149,8 @@ public class TestDataCollectionBuilder {
 	@Test
 	public void testQuarter() {
 		
-		DataSourceer xQuarterData = new DataSourceer();
-		DataSourceer yQuarterData = new DataSourceer();
+		DataSourcerBuilder xQuarterData = new DataSourcerBuilder();
+		DataSourcerBuilder yQuarterData = new DataSourcerBuilder();
 		String xname = "Gnuer", yname = "Lejon",xunit="Antal",yunit="Antal";
 		
 		
@@ -187,8 +187,8 @@ public class TestDataCollectionBuilder {
 	}
 	@Test
 	public void testYear() {
-		DataSourceer  xyearData = new DataSourceer();
-		DataSourceer yyearData = new DataSourceer();
+		DataSourcerBuilder  xyearData = new DataSourcerBuilder();
+		DataSourcerBuilder yyearData = new DataSourcerBuilder();
 		String xname = "Gnuer", yname = "Katter",xunit="Antal",yunit="Antal";
 		
 		 xyearData.setValue(xname,xunit,LocalDate.now(), 10.0);

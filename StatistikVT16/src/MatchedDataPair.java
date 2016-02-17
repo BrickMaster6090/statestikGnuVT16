@@ -1,24 +1,49 @@
 
+/**
+ * @author ntn13dcm
+ * @author ofk14den
+ * @version 2016-02-17
+ */
 public class MatchedDataPair {
-	
+
 	private Double xValue;
 	private Double yValue;
-	
-	public MatchedDataPair(Double x,Double y){
-		
+
+	/**
+	 * Constructor of the MatchedDataPair Class
+	 * 
+	 * @param x
+	 *            Double
+	 * @param y
+	 *            Double
+	 */
+	public MatchedDataPair(Double x, Double y) {
+
 		this.xValue = x;
 		this.yValue = y;
-		
+
 	}
-	public double getXValue(){
-		
+
+	/**
+	 * returns the x value
+	 * 
+	 * @return double
+	 */
+	public double getXValue() {
+
 		return xValue;
 	}
-	public double getYValue(){
+
+	/**
+	 * returns the y value
+	 * 
+	 * @return double
+	 */
+	public double getYValue() {
 		return yValue;
 	}
 
-	public String toString(){
+	public String toString() {
 		return xValue + " " + yValue;
 	}
 

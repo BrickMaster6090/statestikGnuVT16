@@ -1,20 +1,32 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-
+/**
+ * @author ntn13dcm
+ * @author ofk14den
+ * @version 2016-02-17
+ *
+ */
 public class DataCollectionBuilder {
 
 	private DataSource xData;
 	private DataSource yData;
 	private Resolution resolution;
-	
+
 	private Map<String, MatchedDataPair> finalResult;
 
-	private List<MatchedDataPair> matchList = new ArrayList<MatchedDataPair>();
-
+	/**
+	 * DataCollectionBuilder is the constructor of the DataCollectionBuilder
+	 * class.
+	 * 
+	 * @param xData
+	 *            DataSource
+	 * @param yData
+	 *            DataSource
+	 * @param resolution
+	 *            Resolution
+	 */
 	public DataCollectionBuilder(DataSource xData, DataSource yData, Resolution resolution) {
 		this.xData = xData;
 		this.yData = yData;
@@ -22,65 +34,75 @@ public class DataCollectionBuilder {
 
 	}
 
+	/**
+	 * getTitle returns the names of the datasource 1 and 2 in a combined
+	 * sentence.
+	 * 
+	 * @return String
+	 */
 	public String getTitle() {
 
 		return xData.getName() + "/" + yData.getName();
 
 	}
 
+	/**
+	 * creates a DataCollection and returns it.
+	 * 
+	 * @return DataCollection
+	 */
 	public DataCollection getResult() {
-		CalculateData();
+		compileData();
 		DataCollection collection = new DataCollection(getTitle(), xData.getUnit(), yData.getUnit(), finalResult);
 
 		return collection;
 	}
 
-	private Map<String, MatchedDataPair> CalculateData() {
-		MatchedDataPair matchdatapairyear;
+	private Map<String, MatchedDataPair> compileData() {
+		MatchedDataPair matchdatapair;
 
 		finalResult = new HashMap<String, MatchedDataPair>();
-		String keyname = "hej";
-		String xoldyear = "";
+		String keyname = "";
+		String xPreviusKey = "";
 		int divvaluex = 1, divvaluey = 0;
-		Double xsum = 0.0, ysum = 0.0;
+		Double xequalvalue = 0.0, yequalvalue = 0.0;
 
-		for (LocalDate Key : xData.getData().keySet()) {
+		for (LocalDate xCurrentKey : xData.getData().keySet()) {
 
-			if (resolution.trim(Key).equals(xoldyear) == false) {
+			if (resolution.createLabel(xCurrentKey).equals(xPreviusKey) == false) {
 
-				xoldyear = resolution.trim(Key);
+				xPreviusKey = resolution.createLabel(xCurrentKey);
 
-				if (ysum != 0.0) {
-					xsum = xsum / divvaluex;
-					ysum = ysum / divvaluey;
+				if (yequalvalue != 0.0) {
+					xequalvalue = xequalvalue / divvaluex;
+					yequalvalue = yequalvalue / divvaluey;
 
-					matchdatapairyear = new MatchedDataPair(xsum, ysum);
+					matchdatapair = new MatchedDataPair(xequalvalue, yequalvalue);
 
-					AddToList(matchdatapairyear);
-					finalResult.put(keyname, matchdatapairyear);
+					finalResult.put(keyname, matchdatapair);
 
-					xsum = 0.0;
-					ysum = 0.0;
+					xequalvalue = 0.0;
+					yequalvalue = 0.0;
 					divvaluex = 1;
 					divvaluey = 0;
 				}
 				for (LocalDate comaprekey : yData.getData().keySet()) {
 
-					if (resolution.trim(Key).equals(resolution.trim(comaprekey))) {
+					if (resolution.createLabel(xCurrentKey).equals(resolution.createLabel(comaprekey))) {
 
 						divvaluey++;
-						ysum = ysum + yData.getData().get(comaprekey);
+						yequalvalue = yequalvalue + yData.getData().get(comaprekey);
 
 					}
 
 				}
-				if (ysum != 0.0)
-					xsum = xData.getData().get(Key);
+				if (yequalvalue != 0.0)
+					xequalvalue = xData.getData().get(xCurrentKey);
 
-				keyname = resolution.trim(Key);
+				keyname = resolution.createLabel(xCurrentKey);
 
 			} else {
-				xsum = xsum + xData.getData().get(Key);
+				xequalvalue = xequalvalue + xData.getData().get(xCurrentKey);
 
 				divvaluex++;
 
@@ -88,34 +110,21 @@ public class DataCollectionBuilder {
 
 		}
 
-		if (ysum != 0.0) {
-			xsum = xsum / divvaluex;
-			ysum = ysum / divvaluey;
+		if (yequalvalue != 0.0) {
+			xequalvalue = xequalvalue / divvaluex;
+			yequalvalue = yequalvalue / divvaluey;
 
-			matchdatapairyear = new MatchedDataPair(xsum, ysum);
+			matchdatapair = new MatchedDataPair(xequalvalue, yequalvalue);
 
-			AddToList(matchdatapairyear);
-			finalResult.put(keyname, matchdatapairyear);
+			finalResult.put(keyname, matchdatapair);
 
-			xsum = 0.0;
-			ysum = 0.0;
+			xequalvalue = 0.0;
+			yequalvalue = 0.0;
 			divvaluex = 1;
 			divvaluey = 0;
 		}
 
 		return finalResult;
-
-	}
-
-	private void AddToList(MatchedDataPair matchdatapair) {
-
-		matchList.add(matchdatapair);
-
-	}
-
-	public List<MatchedDataPair> GetList() {
-
-		return matchList;
 
 	}
 

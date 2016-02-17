@@ -22,31 +22,31 @@ public class testResoluttion {
 	@Test
 	public void testDay() {
 		
-		assertEquals("1988-11-23", Resolution.DAY.trim(LocalDate.of(1988, 11, 23)));
+		assertEquals("1988-11-23", Resolution.DAY.createLabel(LocalDate.of(1988, 11, 23)));
 		
 	}
 	@Test
 	public void testMonth() {
 		
-		assertEquals("1998 06", Resolution.MONTH.trim(LocalDate.of(1998, 06, 23)));
+		assertEquals("1998 06", Resolution.MONTH.createLabel(LocalDate.of(1998, 06, 23)));
 		
 	}
 	@Test
 	public void testWeek() {
 		
-		assertEquals("1998 26", Resolution.WEEK.trim(LocalDate.of(1998, 06, 23)));
+		assertEquals("1998 26", Resolution.WEEK.createLabel(LocalDate.of(1998, 06, 23)));
 		
 	}
 	@Test
 	public void testQuarter() {
 		
-		assertEquals("2015 2", Resolution.QUARTER.trim(LocalDate.of(2015, 06, 16)));
+		assertEquals("2015 2", Resolution.QUARTER.createLabel(LocalDate.of(2015, 06, 16)));
 		
 	}
 	@Test
 	public void testYear() {
 		
-		assertEquals("2015", Resolution.YEAR.trim(LocalDate.of(2015, 06, 16)));
+		assertEquals("2015", Resolution.YEAR.createLabel(LocalDate.of(2015, 06, 16)));
 		
 	}
 }
