@@ -13,7 +13,6 @@ public class DataCollectionBuilder {
 	private DataSource xData;
 	private DataSource yData;
 	private Resolution resolution;
-
 	private Map<String, MatchedDataPair> finalResult;
 
 	/**
@@ -59,13 +58,13 @@ public class DataCollectionBuilder {
 	}
 
 	private Map<String, MatchedDataPair> compileData() {
-		MatchedDataPair matchdatapair;
+		MatchedDataPair matchDataPair;
 
 		finalResult = new HashMap<String, MatchedDataPair>();
-		String keyname = "";
+		String keyName = "";
 		String xPreviusKey = "";
-		int divvaluex = 1, divvaluey = 0;
-		Double xequalvalue = 0.0, yequalvalue = 0.0;
+		int xDivValue = 1, yDivValue = 0;
+		Double xEqualValue = 0.0, yEqualValue = 0.0;
 
 		for (LocalDate xCurrentKey : xData.getData().keySet()) {
 
@@ -73,55 +72,55 @@ public class DataCollectionBuilder {
 
 				xPreviusKey = resolution.createLabel(xCurrentKey);
 
-				if (yequalvalue != 0.0) {
-					xequalvalue = xequalvalue / divvaluex;
-					yequalvalue = yequalvalue / divvaluey;
+				if (yEqualValue != 0.0) {
+					xEqualValue = xEqualValue / xDivValue;
+					yEqualValue = yEqualValue / yDivValue;
 
-					matchdatapair = new MatchedDataPair(xequalvalue, yequalvalue);
+					matchDataPair = new MatchedDataPair(xEqualValue, yEqualValue);
 
-					finalResult.put(keyname, matchdatapair);
+					finalResult.put(keyName, matchDataPair);
 
-					xequalvalue = 0.0;
-					yequalvalue = 0.0;
-					divvaluex = 1;
-					divvaluey = 0;
+					xEqualValue = 0.0;
+					yEqualValue = 0.0;
+					xDivValue = 1;
+					yDivValue = 0;
 				}
-				for (LocalDate comaprekey : yData.getData().keySet()) {
+				for (LocalDate comapreKey : yData.getData().keySet()) {
 
-					if (resolution.createLabel(xCurrentKey).equals(resolution.createLabel(comaprekey))) {
+					if (resolution.createLabel(xCurrentKey).equals(resolution.createLabel(comapreKey))) {
 
-						divvaluey++;
-						yequalvalue = yequalvalue + yData.getData().get(comaprekey);
+						yDivValue++;
+						yEqualValue = yEqualValue + yData.getData().get(comapreKey);
 
 					}
 
 				}
-				if (yequalvalue != 0.0)
-					xequalvalue = xData.getData().get(xCurrentKey);
+				if (yEqualValue != 0.0)
+					xEqualValue = xData.getData().get(xCurrentKey);
 
-				keyname = resolution.createLabel(xCurrentKey);
+				keyName = resolution.createLabel(xCurrentKey);
 
 			} else {
-				xequalvalue = xequalvalue + xData.getData().get(xCurrentKey);
+				xEqualValue = xEqualValue + xData.getData().get(xCurrentKey);
 
-				divvaluex++;
+				xDivValue++;
 
 			}
 
 		}
 
-		if (yequalvalue != 0.0) {
-			xequalvalue = xequalvalue / divvaluex;
-			yequalvalue = yequalvalue / divvaluey;
+		if (yEqualValue != 0.0) {
+			xEqualValue = xEqualValue / xDivValue;
+			yEqualValue = yEqualValue / yDivValue;
 
-			matchdatapair = new MatchedDataPair(xequalvalue, yequalvalue);
+			matchDataPair = new MatchedDataPair(xEqualValue, yEqualValue);
 
-			finalResult.put(keyname, matchdatapair);
+			finalResult.put(keyName, matchDataPair);
 
-			xequalvalue = 0.0;
-			yequalvalue = 0.0;
-			divvaluex = 1;
-			divvaluey = 0;
+			xEqualValue = 0.0;
+			yEqualValue = 0.0;
+			xDivValue = 1;
+			yDivValue = 0;
 		}
 
 		return finalResult;

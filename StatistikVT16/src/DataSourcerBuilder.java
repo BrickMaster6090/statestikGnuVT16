@@ -13,7 +13,7 @@ import java.util.TreeMap;
 public class DataSourcerBuilder implements DataSource {
 
 	Map<LocalDate, Double> DataValue = new HashMap<LocalDate, Double>();
-	List<String> nameandunit = new ArrayList<String>();
+	List<String> nameAndUnit = new ArrayList<String>();
 
 	/**
 	 * Constructor of the DataSourceer Class
@@ -25,13 +25,13 @@ public class DataSourcerBuilder implements DataSource {
 	@Override
 	public String getName() {
 
-		return nameandunit.get(0).toString();
+		return nameAndUnit.get(0).toString();
 	}
 
 	@Override
 	public String getUnit() {
 
-		return nameandunit.get(1).toString();
+		return nameAndUnit.get(1).toString();
 	}
 
 	/**
@@ -50,8 +50,8 @@ public class DataSourcerBuilder implements DataSource {
 		DataValue.put(date, value);
 		sortData();
 
-		nameandunit.add(name);
-		nameandunit.add(unit);
+		nameAndUnit.add(name);
+		nameAndUnit.add(unit);
 		;
 
 	}
